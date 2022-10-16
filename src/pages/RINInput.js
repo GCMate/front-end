@@ -37,7 +37,7 @@ const RINInput = () => {
             <img 
               onMouseEnter={() => setHover(true)}
               onMouseLeave={() => setHover(false)}
-              src={MouseIcon} width="40" alt="aa"/>
+              src={MouseIcon} width="40" alt="mouse"/>
               </Link>
             { hover && 
               (<h1> LEARN MORE </h1>)}
