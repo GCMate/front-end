@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import gcmateLogo from '../img/GCMateIcon.png';
-import speech1 from '../img/Speech1.png'; 
+import speech1 from '../img/SpeechLeft.png'; 
 import speech2 from '../img/SpeechRight.png';
 import './About.css'
 
