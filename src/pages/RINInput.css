@@ -31,3 +31,7 @@
 .PromptText {
     color: rgb(171, 241, 41)
 }  
+
+.PromptTextInvalid {
+    color: red
+}
