@@ -28,13 +28,14 @@ const RINInput = () => {
 
     function checkValidRIN(r) {
       if (isInt(r)) {
-        console.log("INTEGER")
         if (r.length === 9) { 
           setNextPage(true);
+        } else {
+          setValidRIN(1);
         }
       }
       
-      else { setValidRIN(1) }
+      else { setValidRIN(1); }
     }
 
     return (
