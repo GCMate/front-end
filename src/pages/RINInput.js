@@ -61,8 +61,8 @@ const RINInput = () => {
           position: 'absolute',
           backgroundImage: 'url('+gcmateLogo+')',
           backgroundSize: "cover",
-          height: "721px",
-          width: "1535px" 
+          height: "100%", 
+          width: "100%" 
         }}>
           
           <div className="Title"><h1 class="display-2"> Welcome to  
