@@ -14,7 +14,7 @@ const About = () => {
             width: "1535px"}}>
 
         <div className="Title"> 
-            <h2> <span className="TitleText">About</span></h2>
+            <h1 class="display-2"> <span className="TitleText">About</span></h1>
         </div>
         <div className="SpeechBox1"> <img src={speech1} width="600" alt="box1" /> </div>
         <div className="SpeechBox2"> <img src={speech2} width="570" alt="box2" /> </div>

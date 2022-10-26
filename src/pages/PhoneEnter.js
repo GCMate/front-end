@@ -5,6 +5,7 @@ import {Navigate, BrowserRouter as Router, Link} from 'react-router-dom';
 import PhoneInput from 'react-phone-input-2'
 import { authentication } from '../firebase-config';
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import Button from 'react-bootstrap/Button';
 import 'react-phone-input-2/lib/style.css'
 import './PhoneEnter.css';
 
@@ -72,32 +73,36 @@ const PhoneEnter = () => {
           width: "1535px" 
         }}>
           {nextPage && <Navigate replace to="/classList"/>}
-          <div className="Title"><h1> Almost 
-            <span className="LastWord"> there...</span> </h1></div> 
+          <div className="Title"><h1 class="display-2"> Almost 
+            <span className="LastWord1"> there...</span> </h1></div> 
     
-          <div className="Prompt"> 
+          <div className="Prompt" style={{height: '10vh'}}> 
               {!incorrectOTP && validPhoneNum === 0 && <h2 className="PromptText">
                 Please enter your <span className="PN">phone number </span></h2> }
               {!incorrectOTP && validPhoneNum === 1 && <h2 className="PromptTextInvalid">
                 Invalid phone number. Please try again. </h2>}
               {!incorrectOTP && validPhoneNum === 2 && 
-              <h2 className="PromptText"> Please enter OTP</h2>}
+              <h2 className="PromptText"> Please enter your 
+                <span className="LastWord3"> verification code</span> </h2>}
               {incorrectOTP && validPhoneNum === 2 && 
               <h2 className="PromptTextInvalid">Invalid OTP. Please try again. </h2>}
           </div>
           
+          <div className="PhoneTextInput" style={{position: 'absolute', left: '40%'}}>
           { validPhoneNum !== 2 && 
-          <PhoneInput className="PhoneTextInput"
+          <PhoneInput 
             onlyCountries={['us']}
             country={'us'}
             value={phoneNum}
             onChange={setPhoneNum}/> }
-            
-          {validPhoneNum !== 2 && <button onClick={()=> {checkValidPhoneNum();} }> SUBMIT </button> }
 
-          {validPhoneNum === 2 && 
-            <input type="number" value={otp} onChange={verifyOTP}/> 
-          }
+            {validPhoneNum !== 2 && 
+              <Button variant="success" className="PhoneSubmitButton" 
+                onClick={()=> {checkValidPhoneNum();} }> SUBMIT </Button> }
+            </div>
+            
+            {validPhoneNum === 2 && 
+              <input type="number" value={otp} onChange={verifyOTP}/> }
           
           <div className="LearnIcon" > 
             <Link to="/about">

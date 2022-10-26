@@ -1,0 +1,12 @@
+.ClassList {
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.ClassListTitle {
+    margin-top: 40px;
+    font-size: 40px;
+    right: 200px;
+    font-weight: bold;
+}
