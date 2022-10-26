@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import gcmateLogo from '../img/GCMateIcon.png';
 import MouseIcon from '../img/CompMouse.png';
-import {BrowserRouter as Router, Link} from 'react-router-dom';
+import {Navigate, BrowserRouter as Router, Link} from 'react-router-dom';
 import PhoneInput from 'react-phone-input-2'
 import { authentication } from '../firebase-config';
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
@@ -21,6 +21,7 @@ const PhoneEnter = () => {
     const [hover, setHover] = useState(false); 
     // Used to change text prompt if user inputs incorrect OTP 
     const [incorrectOTP, setIncorrectOTP] = useState(false); 
+    const [nextPage, setNextPage] = useState(false); 
 
     function checkValidPhoneNum() {
         if (phoneNum.length !== 11) { setValidPhoneNum(1); }
@@ -53,7 +54,7 @@ const PhoneEnter = () => {
         confirmationResult.confirm(pin).then((result) => {
           // User signed in successfully.
           const user = result.user;
-          console.log("Correct");
+          setNextPage(true);
           // ...
         }).catch((error) => {
           // Prompt user to try again 
@@ -70,7 +71,7 @@ const PhoneEnter = () => {
           height: "721px",
           width: "1535px" 
         }}>
-          
+          {nextPage && <Navigate replace to="/classList"/>}
           <div className="Title"><h1> Almost 
             <span className="LastWord"> there...</span> </h1></div> 
     

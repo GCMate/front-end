@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import gcmateLogo from '../img/GCMateIcon.png';
 import MouseIcon from '../img/CompMouse.png';
 import {Navigate, BrowserRouter as Router, Link} from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 import './RINInput.css';
 
 const RINInput = () => {
@@ -74,7 +75,8 @@ const RINInput = () => {
           </div>
           <div className="Input"> 
               <input type="text" onChange={getRIN}/> 
-              <button onClick={()=> {setRIN(true); checkValidRIN(rin);} }> SUBMIT </button>
+              <button className="SubmitButton" onClick={()=> {setRIN(true); checkValidRIN(rin);} }> 
+                  SUBMIT </button>
               {nextPage && <Navigate replace to="/phoneEnter"/>}
               {!nextPage && validRIN == 2 && <Navigate replace to="/classList"/>}
           </div>

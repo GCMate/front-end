@@ -18,7 +18,11 @@
     font-weight: bold;
     font-size: 27px;
 }
-  
+
+.SubmitButton {
+    margin-left: 10px;
+}
+
 .LearnIcon {
     margin-top: 140px;
     color: darkblue;
