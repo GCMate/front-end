@@ -65,18 +65,19 @@ const RINInput = () => {
           width: "1535px" 
         }}>
           
-          <div className="Title"><h1> Welcome to  
-            <span className="LastWord"> GCMate</span>! </h1></div> 
+          <div className="Title"><h1 class="display-2"> Welcome to  
+            <span className="LastWord1"> GCMate</span>! </h1></div> 
     
-          <div className="Prompt"> 
-              {validRIN === 0 && <h2 className="PromptTextRIN">Please enter your RIN</h2> }
+          <div className="Prompt" style={{height: '10vh'}}> 
+              {validRIN === 0 && <h2 className="PromptTextRIN">Please enter your <span className="LastWord2"> RIN </span> </h2> }
               {validRIN === 1 && <h2 className="PromptTextInvalid">Invalid RIN. Please try again. </h2>}
               
           </div>
           <div className="Input"> 
               <input type="text" onChange={getRIN}/> 
-              <button className="SubmitButton" onClick={()=> {setRIN(true); checkValidRIN(rin);} }> 
-                  SUBMIT </button>
+              <Button variant="success" className="RINSubmitButton" 
+                onClick={()=> {setRIN(true); checkValidRIN(rin);} }> 
+                  SUBMIT </Button>
               {nextPage && <Navigate replace to="/phoneEnter"/>}
               {!nextPage && validRIN == 2 && <Navigate replace to="/classList"/>}
           </div>

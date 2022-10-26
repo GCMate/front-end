@@ -15,9 +15,9 @@
     font-weight: bold;
     font-size: 27px;
 }
-  
-.flag-dropdown {
-    left: 600px;
+
+.PhoneSubmitButton {
+    margin-top: 10px;
 }
 
 .LearnIcon {
@@ -25,8 +25,12 @@
     color: darkblue;
 }
   
-.LastWord {
+.LastWord1 {
     color: darkmagenta;
+}
+
+.LastWord3 {
+    color: rgb(205, 23, 72);
 }
 
 .PromptText {
