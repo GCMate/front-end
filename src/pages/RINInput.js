@@ -8,9 +8,10 @@ const RINInput = () => {
     const [rin, setRIN] = useState(null);
     /* validRIN = 0 --> RIN hasn't been inputted yet, Display original text 
      * validRIN = 1 --> RIN is invalid, Display "Invalid RIN" text
-     * validRIN = 2 --> RIN is valid, Go to Phone Number Input page 
+     * validRIN = 2 --> RIN is valid
      */
     const [validRIN, setValidRIN] = useState(0); 
+    const [rinData, setRINData] = useState([{}]);
     const [nextPage, setNextPage] = useState(false);
     // Checks whether the user's mouse is hovering over an object or not 
     const [hover, setHover] = useState(false); 
@@ -31,9 +32,7 @@ const RINInput = () => {
         // Valid RIN 
         if (r.length === 9) { 
           
-          const jsonData = {
-            RIN: "661878609", 
-          }
+          const jsonData = { RIN: rin }
           
           fetch('http://localhost:5000/api/rin', {  // Enter your IP address here
 
@@ -42,10 +41,11 @@ const RINInput = () => {
           body: JSON.stringify(jsonData) // body data type must match "Content-Type" header
 
           }).then((response) => response.json())
-          .then(data => console.log(data))
+          .then(rinData => {setRINData(rinData) 
+                            setValidRIN(2)
+                            setNextPage(rinData["valid"] === 'true')})
           .catch((err) => { console.log(err.message);});
-          /**/
-          setNextPage(true);
+          
         } else {
           setValidRIN(1);
         }
@@ -76,6 +76,7 @@ const RINInput = () => {
               <input type="text" onChange={getRIN}/> 
               <button onClick={()=> {setRIN(true); checkValidRIN(rin);} }> SUBMIT </button>
               {nextPage && <Navigate replace to="/phoneEnter"/>}
+              {!nextPage && validRIN == 2 && <Navigate replace to="/classList"/>}
           </div>
           <div className="LearnIcon" > 
             <Link to="/about">
