@@ -30,12 +30,12 @@ const RINInput = () => {
       if (isInt(r)) {
         // Valid RIN 
         if (r.length === 9) { 
-          /*
+          
           const jsonData = {
             RIN: "661878609", 
           }
           
-          fetch('http://localhost:5000/api', {  // Enter your IP address here
+          fetch('http://localhost:5000/api/rin', {  // Enter your IP address here
 
           method: 'POST', 
           headers: { "Content-Type": "application/json" }, 
@@ -44,7 +44,7 @@ const RINInput = () => {
           }).then((response) => response.json())
           .then(data => console.log(data))
           .catch((err) => { console.log(err.message);});
-          */
+          /**/
           setNextPage(true);
         } else {
           setValidRIN(1);
