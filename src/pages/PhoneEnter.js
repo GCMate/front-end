@@ -69,8 +69,8 @@ const PhoneEnter = () => {
           position: 'absolute',
           backgroundImage: 'url('+gcmateLogo+')',
           backgroundSize: "cover",
-          height: "721px",
-          width: "1535px" 
+          height: "100%", 
+          width: "100%"
         }}>
           {nextPage && <Navigate replace to="/classList"/>}
           <div className="Title"><h1 class="display-2"> Almost 
@@ -100,7 +100,7 @@ const PhoneEnter = () => {
               <Button variant="success" className="PhoneSubmitButton" 
                 onClick={()=> {checkValidPhoneNum();} }> SUBMIT </Button> }
             </div>
-            
+
             {validPhoneNum === 2 && 
               <input type="number" value={otp} onChange={verifyOTP}/> }
           

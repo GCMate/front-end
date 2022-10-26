@@ -4,9 +4,15 @@
     align-items: center;
 }
 
+
 .ClassListTitle {
-    margin-top: 40px;
+    margin-top: 30px;
     font-size: 40px;
-    right: 200px;
+    left: 44%;
     font-weight: bold;
+}
+
+.LogoutButton {
+    left: 50px;
+    top: 40px
 }
