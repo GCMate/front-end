@@ -45,7 +45,7 @@ const RINInput = () => {
           
           const jsonData = { RIN: rin }
           
-          fetch('http://localhost:5000/api/rin', {  // Enter your IP address here
+          fetch('http://127.0.0.1:5000/api/rin', {  // Enter your IP address here
 
           method: 'POST', 
           headers: { "Content-Type": "application/json" }, 
@@ -76,7 +76,7 @@ const RINInput = () => {
           width: "100%" 
         }}>
           
-          <div className="Title"><h1 class="display-2"> Welcome to  
+          <div className="Title"><h1 className="display-2"> Welcome to  
             <span className="LastWord1"> GCMate</span>! </h1></div> 
     
           <div className="Prompt" style={{height: '10vh'}}> 
