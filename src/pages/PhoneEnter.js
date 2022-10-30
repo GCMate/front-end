@@ -63,7 +63,7 @@ const PhoneEnter = () => {
           
           const jsonData = { RIN: rin, PHONE: phoneNum }
 
-          fetch('http://localhost:5000/api/phoneRIN', {  // Enter your IP address here
+          fetch('http://127.0.0.1:5000/api/phoneRIN', {  // Enter your IP address here
 
           method: 'POST', 
           headers: { "Content-Type": "application/json" }, 
@@ -91,7 +91,7 @@ const PhoneEnter = () => {
         }}>
           
           {nextPage && <Navigate replace to="/classList"/>}
-          <div className="Title"><h1 class="display-2"> Almost 
+          <div className="Title"><h1 className="display-2"> Almost 
             <span className="LastWord1"> there...</span> </h1></div> 
     
           <div className="Prompt" style={{height: '10vh'}}> 

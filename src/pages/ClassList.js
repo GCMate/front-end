@@ -24,7 +24,7 @@ const ClassList = () => {
       
         <div className="ClassListTitle" 
             style={{position: 'absolute'}}> 
-            <h1 class="display-3"> <span className="TitleText">Class List</span></h1>
+            <h1 className="display-3"> <span className="TitleText">Class List</span></h1>
         </div>
         
         <Link to="/">
