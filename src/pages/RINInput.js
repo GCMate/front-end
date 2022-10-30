@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import gcmateLogo from '../img/GCMateIcon.png';
 import MouseIcon from '../img/CompMouse.png';
-import {Navigate, BrowserRouter as Router, Link} from 'react-router-dom';
+import {useNavigate, BrowserRouter as Router, Link} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import './RINInput.css';
 
 const RINInput = () => {
+    const navigate = useNavigate();
     const [rin, setRIN] = useState(null);
     /* validRIN = 0 --> RIN hasn't been inputted yet, Display original text 
      * validRIN = 1 --> RIN is invalid, Display "Invalid RIN" text
      * validRIN = 2 --> RIN is valid
      */
     const [validRIN, setValidRIN] = useState(0); 
+    // JSON response from backend
     const [rinData, setRINData] = useState([{}]);
     const [nextPage, setNextPage] = useState(false);
+
     // Checks whether the user's mouse is hovering over an object or not 
     const [hover, setHover] = useState(false); 
   
@@ -26,6 +29,13 @@ const RINInput = () => {
     // + CHANGE LATER TO WORK WITH BACKEND 
     function isInt(val) {
       return !isNaN(+val);
+    }
+
+    // Navigates to the next page. If we are going to /phoneEnter, 
+    // send the RIN as well 
+    function navigatePage(props1, props2) {
+      if (props2) { navigate('/phoneEnter', { state: { rin: props1 } }); }
+      else { navigate('/classList'); }
     }
 
     function checkValidRIN(r) {
@@ -44,7 +54,8 @@ const RINInput = () => {
           }).then((response) => response.json())
           .then(rinData => {setRINData(rinData) 
                             setValidRIN(2)
-                            setNextPage(rinData["valid"] === 'true')})
+                            setNextPage(rinData["valid"] === 'true')
+                            navigatePage(r, rinData["valid"] === 'true')})
           .catch((err) => { console.log(err.message);});
           
         } else {
@@ -78,8 +89,7 @@ const RINInput = () => {
               <Button variant="success" className="RINSubmitButton" 
                 onClick={()=> {setRIN(true); checkValidRIN(rin);} }> 
                   SUBMIT </Button>
-              {nextPage && <Navigate replace to="/phoneEnter"/>}
-              {!nextPage && validRIN == 2 && <Navigate replace to="/classList"/>}
+              
           </div>
           <div className="LearnIcon" > 
             <Link to="/about">
