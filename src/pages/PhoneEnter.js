@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import gcmateLogo from '../img/GCMateIcon.png';
 import MouseIcon from '../img/CompMouse.png';
-import {Navigate, BrowserRouter as Router, Link} from 'react-router-dom';
+import {useLocation, useNavigate, Navigate, BrowserRouter as Router, Link} from 'react-router-dom';
 import PhoneInput from 'react-phone-input-2'
 import { authentication } from '../firebase-config';
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
@@ -10,6 +10,11 @@ import 'react-phone-input-2/lib/style.css'
 import './PhoneEnter.css';
 
 const PhoneEnter = () => {
+    // Get RIN from RINInput page 
+    const navigate = useNavigate();
+    const {state} = useLocation();
+    const { rin } = state; 
+
     const [phoneNum, setPhoneNum] = useState(null);
     /* validRIN = 0 --> Phone number hasn't been inputted yet, Display original text 
      * validRIN = 1 --> Phone number invalid, Display "Invalid phone number" text
@@ -56,7 +61,7 @@ const PhoneEnter = () => {
           // User signed in successfully.
           const user = result.user;
           setNextPage(true);
-          // ...
+          
         }).catch((error) => {
           // Prompt user to try again 
           setIncorrectOTP(true);
@@ -72,6 +77,7 @@ const PhoneEnter = () => {
           height: "100%", 
           width: "100%"
         }}>
+          
           {nextPage && <Navigate replace to="/classList"/>}
           <div className="Title"><h1 class="display-2"> Almost 
             <span className="LastWord1"> there...</span> </h1></div> 
