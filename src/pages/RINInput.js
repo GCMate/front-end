@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import gcmateLogo from '../img/GCMateIcon.png';
 import MouseIcon from '../img/CompMouse.png';
 import {useNavigate, BrowserRouter as Router, Link} from 'react-router-dom';

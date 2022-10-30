@@ -60,6 +60,18 @@ const PhoneEnter = () => {
         confirmationResult.confirm(pin).then((result) => {
           // User signed in successfully.
           const user = result.user;
+          
+          const jsonData = { RIN: rin, PHONE: phoneNum }
+
+          fetch('http://localhost:5000/api/phoneRIN', {  // Enter your IP address here
+
+          method: 'POST', 
+          headers: { "Content-Type": "application/json" }, 
+          body: JSON.stringify(jsonData) // body data type must match "Content-Type" header
+
+          }).then((response) => response.json())
+          .catch((err) => { console.log(err.message);});
+
           setNextPage(true);
           
         }).catch((error) => {
