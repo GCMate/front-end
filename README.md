@@ -3,12 +3,15 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Setup and Run 
-In order to run React, you need to have [NodeJS](https://nodejs.org/en/download/) and **npm** installed. Note that installing NodeJS automatically installs npm as well. You can verify that you have successfully downloaded the packages by running `node -v` and `npm -v` in your terminal 
+1. In order to run React, you need to have [NodeJS](https://nodejs.org/en/download/) and **npm** installed. Note that installing NodeJS automatically installs npm as well. You can verify that you have successfully downloaded the packages by running `node -v` and `npm -v` in your terminal 
 
-Next, you need permission to run the React scripts in the project. Enter the prompt below in your terminal: 
-- Windows: `npm install react-scripts --save`
-- Mac: `chmod +x node_modules/.bin/react-scripts`
+2. Next, you need permission to run the React scripts in the project. Enter the prompt below in your terminal:    
+   - Windows: `npm install react-scripts --save`
+   - Mac: `chmod +x node_modules/.bin/react-scripts`
 
+3. Finally, you need to install [React Bootstrap](https://react-bootstrap.github.io/). To do this, run: 
+`npm install react-bootstrap bootstrap`
+ 
 You can then run the code using `npm start`
 ## Commands
 
