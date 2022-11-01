@@ -16,3 +16,40 @@
     left: 50px;
     top: 40px
 }
+
+.SelectSubjectCard{ 
+    top: 17%;
+    left: 31%;
+}
+
+.SubjectDropdown1 {
+    position: absolute;
+    left: 3%;
+}
+
+.SubjectDropdown2 {
+    position: absolute;
+    left: 28%;
+}
+
+.SubjectDropdown3 {
+    position: absolute;
+    left: 53%;
+}
+
+.SubjectDropdown4 {
+    position: absolute;
+    left: 78%;
+}
+
+.SelectCoursesCard{ 
+    top: 40%;
+    left: 31%;
+    overflow-y: scroll;
+}
+
+.CourseButton{
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
