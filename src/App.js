@@ -11,7 +11,8 @@ const App = () => {
   return (
     <Router> 
       <Routes>
-        <Route path="/" element={<RINInput />} />
+        { /* <Route path="/" element={<RINInput />} /> */}
+        <Route path="/" element={<ClassList />} />
         <Route path="about" element={<About />} />
         <Route path="phoneEnter" element={<PhoneEnter />} />
         <Route path="classList" element={<ClassList />} />
