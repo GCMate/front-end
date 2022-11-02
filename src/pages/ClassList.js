@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import gcmateLogo from '../img/GCMateIcon.png';
 import logoutIcon from '../img/LogoutIcon.png';
-import { Link } from 'react-router-dom'
+import coursesIcon from '../img/CoursesIcon.png';
+import { useLocation, Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -10,6 +11,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Modal from 'react-bootstrap/Modal';
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import Alert from 'react-bootstrap/Alert';
 import './ClassList.css';
 
 const ClassList = () => {
@@ -20,15 +23,15 @@ const ClassList = () => {
     const [coursesRetrieved, setCoursesRetrieved] = useState(false);
     // List of courses for chosen subject 
     const [subjectCourses, setSubjCourses] = useState(null);
-    // User clicked a Course button 
-    const [courseClicked, setCourseClicked] = useState(false); 
     // Course that the user selected
     const [currentCourse, setCurrentCourse] = useState(null);
     
     const [show, setShow] = useState(false);
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const [showAlert, setShowAlert] = useState(false); 
+    const [showCourses, setShowCourses] = useState(false);
 
     // Sends the selected subject to the backend 
     // Get the courses of the subject 
@@ -169,7 +172,7 @@ const ClassList = () => {
                             <Button variant="secondary" onClick={() => setShow(false)}>
                                 Cancel
                             </Button>
-                            <Button variant="primary" onClick={()=> {setShow(false); registerCourse() }}>
+                            <Button variant="primary" onClick={()=> {setShow(false); registerCourse(); setShowAlert(true) }}>
                                 Yes
                             </Button>
                             </Modal.Footer>
@@ -181,6 +184,29 @@ const ClassList = () => {
             </Card> 
         }
 
+        
+        <Alert show={showAlert} variant="success" className="CourseAlert"
+            onClose={() => setShowAlert(false)} dismissible>
+            <Alert.Heading>Course Registered!</Alert.Heading>
+        </Alert>
+
+        <>
+            <Button size="lg" variant="info" className="CoursesMenu"
+                onClick={() => setShowCourses(true)}
+                style={{position: 'absolute'}}>
+                    <img src={coursesIcon} alt="add item" width="30" /> Course List
+            </Button>
+
+            <Offcanvas show={showCourses} onHide={() => setShowCourses(false)}>
+            <Offcanvas.Header closeButton>
+            <Offcanvas.Title>User</Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+               Components
+            </Offcanvas.Body>
+        </Offcanvas>
+
+        </>
     </div>
     );
 };

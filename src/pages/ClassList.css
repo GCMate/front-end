@@ -63,3 +63,15 @@
     opacity: 0.5;
     filter: alpha(opacity=50);
 }
+
+.CourseAlert{
+    position: absolute;
+    bottom: 0px;
+    width: 35%;
+    left: 33%;
+}
+
+.CoursesMenu {
+    right: 50px;
+    top: 40px
+}
