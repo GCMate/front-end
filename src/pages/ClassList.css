@@ -53,3 +53,13 @@
     margin-left: 10px;
     margin-right: 10px;
 }
+
+.modal-backdrop.fade {
+    opacity: 0;
+    filter: alpha(opacity=10);
+    }
+    
+.modal-backdrop.fade.in {
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}

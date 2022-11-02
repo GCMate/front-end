@@ -9,13 +9,26 @@ import Card from 'react-bootstrap/Card';
 import Navbar from 'react-bootstrap/Navbar';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import Modal from 'react-bootstrap/Modal';
 import './ClassList.css';
 
 const ClassList = () => {
+    // Determines whether the user has chosen a subject yet 
     const [subjectChosen, setSubjChosen] = useState(false);
+    // User's chosen subject 
     const [subject, setSubject] = useState('');
     const [coursesRetrieved, setCoursesRetrieved] = useState(false);
+    // List of courses for chosen subject 
     const [subjectCourses, setSubjCourses] = useState(null);
+    // User clicked a Course button 
+    const [courseClicked, setCourseClicked] = useState(false); 
+    // Course that the user selected
+    const [currentCourse, setCurrentCourse] = useState(null);
+    
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     // Sends the selected subject to the backend 
     // Get the courses of the subject 
@@ -36,6 +49,12 @@ const ClassList = () => {
                          setSubjCourses(data)})
           .catch((err) => { console.log(err.message);});
     }
+
+    // === API ===
+    // Register this course to the user 
+    const registerCourse=()=> {
+        console.log(currentCourse.title)
+    };
 
     return (
         <div className="ClassList" style={{
@@ -129,19 +148,39 @@ const ClassList = () => {
         
         </Card>
 
-        {coursesRetrieved &&
-        <Card className="SelectCoursesCard" 
-            style={{position: 'absolute', width:"40%", height:"40%"}}>
-        <Card.Header> Select a course! </Card.Header>
-        <Card.Body className="mt-1">
-            {subjectCourses.map(course => {
-                return(
-                    <Button className="CourseButton"> {course.title} </Button>
-                );
-            })}
+        {subjectChosen && coursesRetrieved &&
+            <Card className="SelectCoursesCard" 
+                style={{position: 'absolute', width:"40%", height:"40%"}}>
+            <Card.Header> Select a course! </Card.Header>
+            <Card.Body className="mt-1">
+                {subjectCourses.map(course => {
+                    return(
+                        <>
+                        <Button key={course.id} className="CourseButton" 
+                            onClick={() => {setCurrentCourse(course); setShow(true)}}> 
+                            {course.title} 
+                        </Button>
+                        {show && 
+                            <Modal show={show} onHide={() => setShow(false)}>
+                            <Modal.Header closeButton>
+                            <Modal.Title>Register the selected course?</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Footer>
+                            <Button variant="secondary" onClick={() => setShow(false)}>
+                                Cancel
+                            </Button>
+                            <Button variant="primary" onClick={()=> {setShow(false); registerCourse() }}>
+                                Yes
+                            </Button>
+                            </Modal.Footer>
+                    </Modal>}
+                    </>
+                    );
+                })}
+            </Card.Body>
+            </Card> 
+        }
 
-        </Card.Body>
-        </Card> }
     </div>
     );
 };
