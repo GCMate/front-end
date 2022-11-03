@@ -13,13 +13,15 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import Modal from 'react-bootstrap/Modal';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Alert from 'react-bootstrap/Alert';
+import Badge from 'react-bootstrap/Badge';
 import './ClassList.css';
 
 const ClassList = () => {
     // Get RIN from RINInput page for logging in, or 
     // PhoneEnter page for registering 
     const {state} = useLocation();
-    const { user_rin } = state; 
+    const {user_rin} = state; 
+    const {new_user} = state; 
 
     // Determines whether the user has chosen a subject yet 
     const [subjectChosen, setSubjChosen] = useState(false);
@@ -45,7 +47,9 @@ const ClassList = () => {
 
     // Executed when page loads 
     useEffect(() => {
-        fetchCourseList()
+        if (!new_user) {
+            fetchCourseList()
+        } 
     }, [])
 
     // Fetches all courses registered to the user 
@@ -244,13 +248,18 @@ const ClassList = () => {
             <Offcanvas.Header closeButton>
             <Offcanvas.Title>RPI Student {user_rin} </Offcanvas.Title>
             </Offcanvas.Header>
+            {!emptyCourseList && 
             <Offcanvas.Body>
                 {reg_courses.map(course_elem => {
                         return(
-                            <h3> {course_elem} </h3>
+                            <Badge pill bg="warning" text="dark" 
+                                style={{ fontSize: '16px', padding: '1rem', marginBottom: '15px' }}>
+                                {course_elem[1]} {course_elem[3]}
+                            </Badge>
                         );
                     })}
             </Offcanvas.Body>
+            }
         </Offcanvas>
 
         </>
