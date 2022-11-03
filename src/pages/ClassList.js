@@ -16,6 +16,11 @@ import Alert from 'react-bootstrap/Alert';
 import './ClassList.css';
 
 const ClassList = () => {
+    // Get RIN from RINInput page for logging in, or 
+    // PhoneEnter page for registering 
+    const {state} = useLocation();
+    const { user_rin } = state; 
+
     // Determines whether the user has chosen a subject yet 
     const [subjectChosen, setSubjChosen] = useState(false);
     // User's chosen subject 
@@ -25,13 +30,39 @@ const ClassList = () => {
     const [subjectCourses, setSubjCourses] = useState(null);
     // Course that the user selected
     const [currentCourse, setCurrentCourse] = useState(null);
-    
+    // === Show states ===    
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     const [showAlert, setShowAlert] = useState(false); 
     const [showCourses, setShowCourses] = useState(false);
+    // ====================
+
+    // User's registered courses
+    const [emptyCourseList, setEmptyCourseList] = useState(true); 
+    const [reg_courses, setRegCourses] = useState(['']);  
+
+    // Executed when page loads 
+    useEffect(() => {
+        fetchCourseList()
+    }, [])
+
+    // Fetches all courses registered to the user 
+    const fetchCourseList = () => {
+        const rin_jsonData = { RIN: user_rin }
+          
+        fetch('http://127.0.0.1:5000/api/userCourses', {  
+
+        method: 'POST', 
+        headers: { "Content-Type": "application/json" }, 
+        body: JSON.stringify(rin_jsonData) 
+
+        }).then((response) => response.json())
+        .then(data => {setRegCourses(data.courses)
+                       setEmptyCourseList(data.courses.length == 0)})
+        .catch((err) => { console.log(err.message);});
+    }
 
     // Sends the selected subject to the backend 
     // Get the courses of the subject 
@@ -39,13 +70,13 @@ const ClassList = () => {
         setSubjChosen(true);
         setSubject(subj);
         
-        const jsonData = { SUBJECT: subj }
+        const subj_jsonData = { SUBJECT: subj }
           
           fetch('http://127.0.0.1:5000/api/coursebysubj', {  
 
           method: 'POST', 
           headers: { "Content-Type": "application/json" }, 
-          body: JSON.stringify(jsonData) 
+          body: JSON.stringify(subj_jsonData) 
 
           }).then((response) => response.json())
           .then(data => {setCoursesRetrieved(true)
@@ -56,7 +87,19 @@ const ClassList = () => {
     // === API ===
     // Register this course to the user 
     const registerCourse=()=> {
-        console.log(currentCourse.title)
+        const reg_jsonData = { RIN: user_rin, COURSEID: currentCourse.id }
+          
+        fetch('http://127.0.0.1:5000/api/ucupdate', {  
+
+        method: 'POST', 
+        headers: { "Content-Type": "application/json" }, 
+        body: JSON.stringify(reg_jsonData) 
+
+        }).then((response) => response.json())
+        .then(data => {setRegCourses(data.courses)
+                       setEmptyCourseList(false)})
+        .catch((err) => { console.log(err.message);});
+        
     };
 
     return (
@@ -199,10 +242,14 @@ const ClassList = () => {
 
             <Offcanvas show={showCourses} onHide={() => setShowCourses(false)}>
             <Offcanvas.Header closeButton>
-            <Offcanvas.Title>User</Offcanvas.Title>
+            <Offcanvas.Title>RPI Student {user_rin} </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-               Components
+                {reg_courses.map(cor => {
+                        return(
+                            <h3> {cor} </h3>
+                        );
+                    })}
             </Offcanvas.Body>
         </Offcanvas>
 
