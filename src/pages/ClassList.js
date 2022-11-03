@@ -245,9 +245,9 @@ const ClassList = () => {
             <Offcanvas.Title>RPI Student {user_rin} </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-                {reg_courses.map(cor => {
+                {reg_courses.map(course_elem => {
                         return(
-                            <h3> {cor} </h3>
+                            <h3> {course_elem} </h3>
                         );
                     })}
             </Offcanvas.Body>
