@@ -71,8 +71,8 @@ const PhoneEnter = () => {
 
           }).then((response) => response.json())
           .catch((err) => { console.log(err.message);});
-
-          setNextPage(true);
+          
+          navigate('/classList', { state: { user_rin: rin } });
           
         }).catch((error) => {
           // Prompt user to try again 

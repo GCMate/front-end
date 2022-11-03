@@ -35,7 +35,7 @@ const RINInput = () => {
     // send the RIN as well 
     function navigatePage(props1, props2) {
       if (props2) { navigate('/phoneEnter', { state: { rin: props1 } }); }
-      else { navigate('/classList'); }
+      else { navigate('/classList', { state: { user_rin: props1 } }); }
     }
 
     function checkValidRIN(r) {
