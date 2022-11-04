@@ -37,7 +37,8 @@ const ClassList = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const [showAlert, setShowAlert] = useState(false); 
+    const [showCorrectAlert, setShowCorrectAlert] = useState(false); 
+    const [showDuplicateAlert, setShowDuplicateAlert] = useState(false);
     const [showCourses, setShowCourses] = useState(false);
     // ====================
 
@@ -65,7 +66,7 @@ const ClassList = () => {
         }).then((response) => response.json())
         .then(data => {setRegCourses(data.courses)
                        setEmptyCourseList(data.courses.length == 0)})
-        .catch((err) => { console.log(err.message);});
+        .catch((err) => { console.log("Success!");});
     }
 
     // Sends the selected subject to the backend 
@@ -101,8 +102,9 @@ const ClassList = () => {
 
         }).then((response) => response.json())
         .then(data => {setRegCourses(data.courses)
-                       setEmptyCourseList(false)})
-        .catch((err) => { console.log(err.message);});
+                       setEmptyCourseList(false)
+                       setShowCorrectAlert(true)})
+        .catch((err) => { setShowDuplicateAlert(true)});
         
     };
 
@@ -219,7 +221,7 @@ const ClassList = () => {
                             <Button variant="secondary" onClick={() => setShow(false)}>
                                 Cancel
                             </Button>
-                            <Button variant="primary" onClick={()=> {setShow(false); registerCourse(); setShowAlert(true) }}>
+                            <Button variant="primary" onClick={()=> {setShow(false); registerCourse() }}>
                                 Yes
                             </Button>
                             </Modal.Footer>
@@ -232,9 +234,14 @@ const ClassList = () => {
         }
 
         
-        <Alert show={showAlert} variant="success" className="CourseAlert"
-            onClose={() => setShowAlert(false)} dismissible>
+        <Alert show={showCorrectAlert} variant="success" className="CourseAlert"
+            onClose={() => setShowCorrectAlert(false)} dismissible>
             <Alert.Heading>Course Registered!</Alert.Heading>
+        </Alert>
+
+        <Alert show={showDuplicateAlert} variant="danger" className="CourseAlert"
+            onClose={() => setShowDuplicateAlert(false)} dismissible>
+            <Alert.Heading>Course Already Registered...</Alert.Heading>
         </Alert>
 
         <>
