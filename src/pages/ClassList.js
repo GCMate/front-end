@@ -32,14 +32,21 @@ const ClassList = () => {
     const [subjectCourses, setSubjCourses] = useState(null);
     // Course that the user selected
     const [currentCourse, setCurrentCourse] = useState(null);
-    // === Show states ===    
-    const [show, setShow] = useState(false);
+
+    // ===== Show states =====    
+    // Register Course modal 
+    const [show, setShow] = useState(false); 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
-    const [showCorrectAlert, setShowCorrectAlert] = useState(false); 
-    const [showDuplicateAlert, setShowDuplicateAlert] = useState(false);
+    // Remove Course modal
+    const [showRCModal, setShowRCModal] = useState(false); 
+    const handleRCClose = () => setShowRCModal(false); 
+    // Show a subject's courses 
     const [showCourses, setShowCourses] = useState(false);
+    // Alert for course registration
+    const [showCorrectAlert, setShowCorrectAlert] = useState(false); 
+    // Alert for choosing duplicate
+    const [showDuplicateAlert, setShowDuplicateAlert] = useState(false);     
     // ====================
 
     // User's registered courses
@@ -53,6 +60,7 @@ const ClassList = () => {
         } 
     }, [])
 
+    // ========== API CALLS ==========
     // Fetches all courses registered to the user 
     const fetchCourseList = () => {
         const rin_jsonData = { RIN: user_rin }
@@ -89,8 +97,7 @@ const ClassList = () => {
           .catch((err) => { console.log(err.message);});
     }
 
-    // === API ===
-    // Register this course to the user 
+    // Register the selected course to the user 
     const registerCourse=()=> {
         const reg_jsonData = { RIN: user_rin, COURSEID: currentCourse.id }
           
@@ -107,6 +114,22 @@ const ClassList = () => {
         .catch((err) => { setShowDuplicateAlert(true)});
         
     };
+
+    // Remove a registered course from the user
+    const removeCourse=(course_id)=> {
+        const rem_jsonData = { RIN: user_rin, COURSEID: course_id }
+
+        fetch('http://127.0.0.1:5000/api/ucremove', {  
+
+            method: 'POST', 
+            headers: { "Content-Type": "application/json" }, 
+            body: JSON.stringify(rem_jsonData) 
+    
+            }).then((response) => response.json())
+            .then(data => {setRegCourses(data.courses)})
+            .catch((err) => { console.log(err.message); });
+    }; 
+    // =========================================================
 
     return (
         <div className="ClassList" style={{
@@ -259,10 +282,30 @@ const ClassList = () => {
             <Offcanvas.Body>
                 {reg_courses.map(course_elem => {
                         return(
-                            <Badge pill bg="warning" text="dark" 
-                                style={{ fontSize: '16px', padding: '1rem', marginBottom: '15px' }}>
-                                {course_elem[1]} {course_elem[3]}
-                            </Badge>
+                            <Card key={course_elem[1]} bg="warning" text="dark" 
+                                style={{ width: '20rem', marginBottom: '18px' }}>
+                                <Card.Body>
+                                <Card.Title> {course_elem[3]} </Card.Title>
+                                <Card.Subtitle className="mb-2 text-muted"> 
+                                    {course_elem[1]} </Card.Subtitle>
+
+                                <>
+                                <Button variant="danger" 
+                                    onClick={()=> {removeCourse(course_elem[1]); setShowRCModal(true)}}> 
+                                    Remove Course
+                                </Button>
+
+                                <Modal size="sm" show={showRCModal} onHide={handleRCClose}
+                                    backdrop="static" keyboard={false}>
+                                    <Modal.Header closeButton>
+                                    <Modal.Title> Course Removed! </Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body> You may now choose another course! </Modal.Body>
+                                    
+                                </Modal>
+                                </>
+                                </Card.Body>
+                            </Card>
                         );
                     })}
             </Offcanvas.Body>
