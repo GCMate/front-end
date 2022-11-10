@@ -17,8 +17,9 @@ import './GroupChat.css';
 
 const GroupChat = () => {
     const {state} = useLocation();
-    const {user_rin} = state; 
-    //const {course} = state; 
+    const {rin} = state; 
+    const {course_title} = state;
+    const {course_id} = state; 
 
     // ===== Show states =====    
     // Show the user's joined group chats 
@@ -59,11 +60,11 @@ const GroupChat = () => {
 
             <Offcanvas show={showJoinedGC} onHide={() => setShowJoinedGC(false)}>
             <Offcanvas.Header closeButton>
-            <Offcanvas.Title>RPI Student  </Offcanvas.Title>
+            <Offcanvas.Title>RPI Student {rin} </Offcanvas.Title>
             </Offcanvas.Header>
             
             <Offcanvas.Body>
-                
+                {course_title} {course_id}
             </Offcanvas.Body>
             
         </Offcanvas>

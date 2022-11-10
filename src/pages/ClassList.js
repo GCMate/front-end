@@ -286,6 +286,13 @@ const ClassList = () => {
                                 <Card.Subtitle className="mb-2 text-muted"> 
                                     {course_elem[1]} </Card.Subtitle>
 
+                                <Link to="/groupChat" 
+                                    state={{ rin: user_rin, course_title: course_elem[3], course_id: course_elem[1] }}>
+                                    <Button variant="info" className="FindGCButton" >
+                                        Find Group Chats!
+                                    </Button>
+                                </Link>
+
                                 <>
                                 <Button variant="danger" 
                                     onClick={()=> {removeCourse(course_elem[1]); setShowRCModal(true)}}> 

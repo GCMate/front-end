@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import gcmateLogo from '../img/GCMateIcon.png';
 import MouseIcon from '../img/CompMouse.png';
+import LeftArrowIcon from '../img/LeftArrowIcon.png'
 import {useLocation, useNavigate, Navigate, BrowserRouter as Router, Link} from 'react-router-dom';
 import PhoneInput from 'react-phone-input-2'
 import { authentication } from '../firebase-config';
@@ -90,6 +91,13 @@ const PhoneEnter = () => {
           width: "100%"
         }}>
           
+          <Link to="/">
+            <Button size="lg"  className="LogoutButton" style={{
+                position: 'absolute'}}>
+                <img src={LeftArrowIcon} alt="add item" width="30" /> Back
+            </Button>
+          </Link>
+
           {nextPage && <Navigate replace to="/classList"/>}
           <div className="Title"><h1 className="display-2"> Almost 
             <span className="LastWord1"> there...</span> </h1></div> 
