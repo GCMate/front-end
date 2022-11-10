@@ -1,0 +1,22 @@
+.GroupChat {
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.GroupChatTitle {
+    margin-top: 25px;
+    font-size: 40px;
+    left: 43%;
+    font-weight: bold;
+}
+
+.TitleTextGC {
+    text-align: center;
+    color: rgb(114, 8, 179);
+  }
+
+.GCMenu {
+    right: 50px;
+    top: 40px
+}

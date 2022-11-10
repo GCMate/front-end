@@ -13,7 +13,6 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import Modal from 'react-bootstrap/Modal';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Alert from 'react-bootstrap/Alert';
-import Badge from 'react-bootstrap/Badge';
 import './ClassList.css';
 
 const ClassList = () => {
@@ -51,13 +50,11 @@ const ClassList = () => {
 
     // User's registered courses
     const [emptyCourseList, setEmptyCourseList] = useState(true); 
-    const [reg_courses, setRegCourses] = useState(['']);  
+    const [reg_courses, setRegCourses] = useState([]);  
 
     // Executed when page loads 
     useEffect(() => {
-        if (!new_user) {
-            fetchCourseList()
-        } 
+        fetchCourseList();
     }, [])
 
     // ========== API CALLS ==========
