@@ -15,7 +15,7 @@ const App = () => {
         <Route path="about" element={<About />} />
         <Route path="phoneEnter" element={<PhoneEnter />} />
         <Route path="classList" element={<ClassList />} />
-        <Route path="/groupChat" element={<GroupChat />} />
+        <Route path="groupChat" element={<GroupChat />} />
       </Routes>
     </Router>
   );
