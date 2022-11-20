@@ -30,7 +30,6 @@ const GroupChat = () => {
     const [showLeaveAlert, setShowLeaveAlert] = useState(false);      
     // ====================    
 
-    const [gcNum, setGCNum] = useState(1);
     const [members, setMembers] = useState([]); 
     const [joinedChats, setJoinedChats] = useState([]); 
 
