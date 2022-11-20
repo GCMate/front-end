@@ -30,6 +30,7 @@ const ClassList = () => {
     const [subjectCourses, setSubjCourses] = useState(null);
     // Course that the user selected
     const [currentCourse, setCurrentCourse] = useState(null);
+    const [emptyCourseList, setEmptyCourseList] = useState(true); 
 
     // ===== Show states =====    
     // Register Course modal 
@@ -67,7 +68,8 @@ const ClassList = () => {
         body: JSON.stringify(rin_jsonData) 
 
         }).then((response) => response.json())
-        .then(data => {setRegCourses(data.courses)})
+        .then(data => {setRegCourses(data.courses)
+                       setEmptyCourseList(data.courses.length == 0)})
         .catch((err) => { console.log("Success!");});
     }
 
@@ -119,7 +121,8 @@ const ClassList = () => {
             body: JSON.stringify(rem_jsonData) 
     
             }).then((response) => response.json())
-            .then(data => {setRegCourses(data.courses)})
+            .then(data => {setRegCourses(data.courses)
+                           setEmptyCourseList(data.courses.length == 0)})
             .catch((err) => { console.log(err.message); });
     }; 
     // =========================================================
@@ -295,6 +298,7 @@ const ClassList = () => {
                                     Remove Course
                                 </Button>
 
+                                {!emptyCourseList && 
                                 <Modal size="sm" show={showRCModal} onHide={handleRCClose}
                                     backdrop="static" keyboard={false}>
                                     <Modal.Header closeButton>
@@ -302,7 +306,7 @@ const ClassList = () => {
                                     </Modal.Header>
                                     <Modal.Body> You may now choose another course! </Modal.Body>
                                     
-                                </Modal>
+                                </Modal>}
                                 </>
                                 </Card.Body>
                             </Card>
