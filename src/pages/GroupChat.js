@@ -3,15 +3,12 @@ import { useLocation, Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import gcmateLogo from '../img/GCMateIcon.png';
 import logoutIcon from '../img/LogoutIcon.png';
-import coursesIcon from '../img/CoursesIcon.png';
 import chatIcon from '../img/ChatIcon.png'
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Navbar from 'react-bootstrap/Navbar';
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Modal from 'react-bootstrap/Modal';
+import Toast from 'react-bootstrap/Toast';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import './GroupChat.css';
 
@@ -25,6 +22,8 @@ const GroupChat = () => {
     // Show the user's joined group chats 
     const [showJoinedGC, setShowJoinedGC] = useState(false); 
     // ====================    
+
+    const {gcNum, setGCNum} = useState(1);
 
     return (
         <div className="GroupChat" style={{
@@ -64,12 +63,43 @@ const GroupChat = () => {
             </Offcanvas.Header>
             
             <Offcanvas.Body>
-                {course_title} {course_id}
+                
             </Offcanvas.Body>
             
         </Offcanvas>
 
         </>
+
+        <Card style={{position: 'absolute', width:"20%", height:"15%"}} className="CourseReminder">
+        <Card.Header> <span className="CurrCourseText"> Current Course </span>: {course_id} </Card.Header>
+        <Card.Body>
+            <Card.Title>{course_title}</Card.Title>
+            
+            
+        </Card.Body>
+        </Card>
+        
+        <div className="GroupChatComponent" style={{position: 'absolute'}}>
+            <Toast bg='warning' >
+                <Toast.Header closeButton={false}>
+                    <img src="holder.js/20x20?text=%20"  alt="" />
+                    <strong className="me-auto"> Chat Room 1</strong>
+                    <small> 
+                        <Button size="sm" variant="outline-success"> Join Chat</Button>
+                        <Link to="/chat" 
+                                state={{ user_rin: rin, class_title: course_title }}>
+                                <Button size="sm" variant="outline-dark" className="ChatRoomButton"> 
+                                    Enter Chat Room 
+                                </Button>
+                        </Link>
+                        
+                    </small>
+                </Toast.Header>
+                <Toast.Body>
+                    Members: 
+                </Toast.Body>
+            </Toast>
+            </div>
 
         </div>
     );

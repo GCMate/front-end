@@ -6,6 +6,7 @@ import About from "./pages/About";
 import PhoneEnter from "./pages/PhoneEnter"
 import ClassList from './pages/ClassList';
 import GroupChat from './pages/GroupChat';
+import Chat from './pages/Chat'; 
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="phoneEnter" element={<PhoneEnter />} />
         <Route path="classList" element={<ClassList />} />
         <Route path="groupChat" element={<GroupChat />} />
+        <Route path="chat" element={<Chat />} />
       </Routes>
     </Router>
   );

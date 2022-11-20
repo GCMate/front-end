@@ -54,7 +54,10 @@ const ClassList = () => {
 
     // Executed when page loads 
     useEffect(() => {
-        fetchCourseList();
+        if (!new_user) {
+            fetchCourseList();
+        }
+        
     }, [])
 
     // ========== API CALLS ==========
@@ -259,10 +262,10 @@ const ClassList = () => {
             <Alert.Heading>Course Registered!</Alert.Heading>
         </Alert>
 
-        <Alert show={showDuplicateAlert} variant="danger" className="CourseAlert"
+        {/*<Alert show={showDuplicateAlert} variant="danger" className="CourseAlert"
             onClose={() => setShowDuplicateAlert(false)} dismissible>
             <Alert.Heading>Course Already Registered...</Alert.Heading>
-        </Alert>
+        </Alert>*/}
 
         <>
             <Button size="lg" variant="info" className="CoursesMenu"
