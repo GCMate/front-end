@@ -14,16 +14,11 @@
 .TitleTextGC {
     text-align: center;
     color: rgb(114, 8, 179);
-<<<<<<< HEAD
 }
-=======
-  }
->>>>>>> bcb3d0a150d647732e51589ee63b3e5e34db086f
 
 .GCMenu {
     right: 50px;
     top: 40px
-<<<<<<< HEAD
 }
 
 .CourseReminder {
@@ -64,6 +59,4 @@
 .ClassListButton {
     left: 15%;
     top: 40px
-=======
->>>>>>> bcb3d0a150d647732e51589ee63b3e5e34db086f
 }

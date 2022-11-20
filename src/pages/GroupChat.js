@@ -1,23 +1,14 @@
 import React, { useEffect, useState } from 'react';
-<<<<<<< HEAD
 import { useNavigate, useLocation, Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import gcmateLogo from '../img/GCMateIcon.png';
 import logoutIcon from '../img/LogoutIcon.png';
 import LeftArrowIcon from '../img/LeftArrowIcon.png'
-=======
-import { useLocation, Link } from 'react-router-dom'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import gcmateLogo from '../img/GCMateIcon.png';
-import logoutIcon from '../img/LogoutIcon.png';
-import coursesIcon from '../img/CoursesIcon.png';
->>>>>>> bcb3d0a150d647732e51589ee63b3e5e34db086f
 import chatIcon from '../img/ChatIcon.png'
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Navbar from 'react-bootstrap/Navbar';
-<<<<<<< HEAD
 import Toast from 'react-bootstrap/Toast';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Alert from 'react-bootstrap/Alert';
@@ -25,15 +16,6 @@ import './GroupChat.css';
 
 const GroupChat = () => {
     const navigate = useNavigate();
-=======
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Modal from 'react-bootstrap/Modal';
-import Offcanvas from 'react-bootstrap/Offcanvas';
-import './GroupChat.css';
-
-const GroupChat = () => {
->>>>>>> bcb3d0a150d647732e51589ee63b3e5e34db086f
     const {state} = useLocation();
     const {rin} = state; 
     const {course_title} = state;
@@ -42,7 +24,6 @@ const GroupChat = () => {
     // ===== Show states =====    
     // Show the user's joined group chats 
     const [showJoinedGC, setShowJoinedGC] = useState(false); 
-<<<<<<< HEAD
     // Alert for joining chat
     const [showJoinAlert, setShowJoinAlert] = useState(false); 
     // Alert for leaving chat
@@ -104,10 +85,6 @@ const GroupChat = () => {
     }
     // =================================
 
-=======
-    // ====================    
-
->>>>>>> bcb3d0a150d647732e51589ee63b3e5e34db086f
     return (
         <div className="GroupChat" style={{
             position: 'absolute',
@@ -126,15 +103,12 @@ const GroupChat = () => {
             <h1 className="display-3"> <span className="TitleTextGC">Group Chats</span></h1>
         </div>
         
-<<<<<<< HEAD
         <Link to="/classList" state={{ user_rin: rin }}>
             <Button size="lg" className="ClassListButton" style={{position: 'absolute'}}>
                 <img src={LeftArrowIcon} alt="add item" width="30" /> Back to Courses
             </Button>
         </Link>
 
-=======
->>>>>>> bcb3d0a150d647732e51589ee63b3e5e34db086f
         <Link to="/">
             <Button size="lg" variant="danger" className="LogoutButton" style={{
                 position: 'absolute'}}>
@@ -155,23 +129,18 @@ const GroupChat = () => {
             </Offcanvas.Header>
             
             <Offcanvas.Body>
-<<<<<<< HEAD
                 {joinedChats.map(c => {
                     return( <>
                              <h4> {c} </h4> 
                             </>
                         );
                     })}
-=======
-                {course_title} {course_id}
->>>>>>> bcb3d0a150d647732e51589ee63b3e5e34db086f
             </Offcanvas.Body>
             
         </Offcanvas>
 
         </>
 
-<<<<<<< HEAD
         <Card style={{position: 'absolute', width:"20%", height:"15%"}} className="CourseReminder">
         <Card.Header> <span className="CurrCourseText"> Current Course </span>: {course_id} </Card.Header>
         <Card.Body>
@@ -233,8 +202,6 @@ const GroupChat = () => {
             <Alert.Heading>You have left a group chat!</Alert.Heading>
         </Alert>
 
-=======
->>>>>>> bcb3d0a150d647732e51589ee63b3e5e34db086f
         </div>
     );
   };

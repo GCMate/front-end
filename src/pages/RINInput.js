@@ -67,11 +67,7 @@ const RINInput = () => {
     }
 
     return (
-<<<<<<< HEAD
         <div className="RINInputWrapper">
-=======
-        
->>>>>>> bcb3d0a150d647732e51589ee63b3e5e34db086f
         <div className="RINInput" style={{
           position: 'absolute',
           backgroundImage: 'url('+gcmateLogo+')',
@@ -108,11 +104,7 @@ const RINInput = () => {
           </div>
           
         </div>
-<<<<<<< HEAD
         </div>
-=======
-        
->>>>>>> bcb3d0a150d647732e51589ee63b3e5e34db086f
       );    
 };
 
