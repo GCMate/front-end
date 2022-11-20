@@ -20,6 +20,10 @@ const ClassList = () => {
     // PhoneEnter page for registering 
     const {state} = useLocation();
     const {user_rin} = state; 
+<<<<<<< HEAD
+=======
+    const {new_user} = state; 
+>>>>>>> bcb3d0a150d647732e51589ee63b3e5e34db086f
 
     // Determines whether the user has chosen a subject yet 
     const [subjectChosen, setSubjChosen] = useState(false);
@@ -48,6 +52,10 @@ const ClassList = () => {
     // ====================
 
     // User's registered courses
+<<<<<<< HEAD
+=======
+    const [emptyCourseList, setEmptyCourseList] = useState(true); 
+>>>>>>> bcb3d0a150d647732e51589ee63b3e5e34db086f
     const [reg_courses, setRegCourses] = useState([]);  
 
     // Executed when page loads 
@@ -67,7 +75,12 @@ const ClassList = () => {
         body: JSON.stringify(rin_jsonData) 
 
         }).then((response) => response.json())
+<<<<<<< HEAD
         .then(data => {setRegCourses(data.courses)})
+=======
+        .then(data => {setRegCourses(data.courses)
+                       setEmptyCourseList(data.courses.length == 0)})
+>>>>>>> bcb3d0a150d647732e51589ee63b3e5e34db086f
         .catch((err) => { console.log("Success!");});
     }
 
@@ -103,6 +116,10 @@ const ClassList = () => {
 
         }).then((response) => response.json())
         .then(data => {setRegCourses(data.courses)
+<<<<<<< HEAD
+=======
+                       setEmptyCourseList(false)
+>>>>>>> bcb3d0a150d647732e51589ee63b3e5e34db086f
                        setShowCorrectAlert(true)})
         .catch((err) => { setShowDuplicateAlert(true)});
         
@@ -271,7 +288,11 @@ const ClassList = () => {
             <Offcanvas.Header closeButton>
             <Offcanvas.Title>RPI Student {user_rin} </Offcanvas.Title>
             </Offcanvas.Header>
+<<<<<<< HEAD
             
+=======
+            {!emptyCourseList && 
+>>>>>>> bcb3d0a150d647732e51589ee63b3e5e34db086f
             <Offcanvas.Body>
                 {reg_courses.map(course_elem => {
                         return(
@@ -309,7 +330,11 @@ const ClassList = () => {
                         );
                     })}
             </Offcanvas.Body>
+<<<<<<< HEAD
             
+=======
+            }
+>>>>>>> bcb3d0a150d647732e51589ee63b3e5e34db086f
         </Offcanvas>
 
         </>

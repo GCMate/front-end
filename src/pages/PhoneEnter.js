@@ -4,15 +4,22 @@ import MouseIcon from '../img/CompMouse.png';
 import LeftArrowIcon from '../img/LeftArrowIcon.png'
 import {useLocation, useNavigate, Navigate, BrowserRouter as Router, Link} from 'react-router-dom';
 import PhoneInput from 'react-phone-input-2'
+<<<<<<< HEAD
 import { app } from '../firebase-config';
 import { getAuth } from "firebase/auth";
+=======
+import { authentication } from '../firebase-config';
+>>>>>>> bcb3d0a150d647732e51589ee63b3e5e34db086f
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import Button from 'react-bootstrap/Button';
 import 'react-phone-input-2/lib/style.css'
 import './PhoneEnter.css';
 
 const PhoneEnter = () => {
+<<<<<<< HEAD
     const authentication = getAuth(app);
+=======
+>>>>>>> bcb3d0a150d647732e51589ee63b3e5e34db086f
     // Get RIN from RINInput page 
     const navigate = useNavigate();
     const {state} = useLocation();

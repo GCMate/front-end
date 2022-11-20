@@ -14,7 +14,10 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
+<<<<<<< HEAD
     "react-firebase-hooks": "^5.1.1",
+=======
+>>>>>>> bcb3d0a150d647732e51589ee63b3e5e34db086f
     "react-phone-input-2": "^2.15.1",
     "react-phone-number-input": "^3.2.11",
     "react-router-dom": "^6.4.2",
