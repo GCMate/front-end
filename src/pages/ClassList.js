@@ -54,10 +54,7 @@ const ClassList = () => {
 
     // Executed when page loads 
     useEffect(() => {
-        if (!new_user) {
-            fetchCourseList();
-        }
-        
+        fetchCourseList();
     }, [])
 
     // ========== API CALLS ==========
@@ -278,7 +275,7 @@ const ClassList = () => {
             <Offcanvas.Header closeButton>
             <Offcanvas.Title>RPI Student {user_rin} </Offcanvas.Title>
             </Offcanvas.Header>
-            {!emptyCourseList && 
+            
             <Offcanvas.Body>
                 {reg_courses.map(course_elem => {
                         return(
@@ -316,7 +313,7 @@ const ClassList = () => {
                         );
                     })}
             </Offcanvas.Body>
-            }
+            
         </Offcanvas>
 
         </>

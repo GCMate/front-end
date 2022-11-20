@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import "./Chat.css";
-import { useLocation, Link } from 'react-router-dom'
+import LeftArrowIcon from '../img/LeftArrowIcon.png'
+import { useNavigate, useLocation, Link } from 'react-router-dom'
 import {collection, orderBy, query, limit, addDoc, serverTimestamp} from 'firebase/firestore';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
@@ -18,6 +19,12 @@ const auth = getAuth(app);
 const firestore = getFirestore(app);
 
 function SignIn() {
+  const navigate = useNavigate();
+  const {state} = useLocation();
+  const {user_rin} = state; 
+  const {class_title} = state;  
+  const {class_id} = state; 
+    
   const signInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider);
@@ -26,6 +33,13 @@ function SignIn() {
   return (
     <>
     <div className="Chat"> 
+      <Button size="lg"  className="LogoutButton" 
+       style={{position: 'absolute'}}
+       onClick={() => navigate('/groupChat', 
+                      { state: { rin: user_rin, course_title: class_title, course_id: class_id } }) }>
+                <img src={LeftArrowIcon} alt="add item" width="30" /> Back
+      </Button>
+
       <Button size="lg" className="sign-in" style={{position: 'absolute'}} 
        onClick={signInWithGoogle}>
         Sign in with Google

@@ -39,3 +39,14 @@
 .ChatRoomButton {
     margin-left: 10px;
 }
+
+.BoldText {
+    font-weight: bold;
+}
+
+.ChatAlert{
+    position: absolute;
+    bottom: 0px;
+    width: 35%;
+    left: 33%;
+}
