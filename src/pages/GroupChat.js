@@ -3,6 +3,7 @@ import { useNavigate, useLocation, Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import gcmateLogo from '../img/GCMateIcon.png';
 import logoutIcon from '../img/LogoutIcon.png';
+import LeftArrowIcon from '../img/LeftArrowIcon.png'
 import chatIcon from '../img/ChatIcon.png'
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -103,6 +104,12 @@ const GroupChat = () => {
             <h1 className="display-3"> <span className="TitleTextGC">Group Chats</span></h1>
         </div>
         
+        <Link to="/classList" state={{ user_rin: rin }}>
+            <Button size="lg" className="ClassListButton" style={{position: 'absolute'}}>
+                <img src={LeftArrowIcon} alt="add item" width="30" /> Back to Courses
+            </Button>
+        </Link>
+
         <Link to="/">
             <Button size="lg" variant="danger" className="LogoutButton" style={{
                 position: 'absolute'}}>

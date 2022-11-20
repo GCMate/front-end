@@ -44,9 +44,19 @@
     font-weight: bold;
 }
 
-.ChatAlert{
+.ChatAlert {
     position: absolute;
     bottom: 0px;
     width: 35%;
     left: 33%;
+}
+
+.GroupChatLogOutButton {
+    left: 50px;
+    top: 40px
+}
+
+.ClassListButton {
+    left: 15%;
+    top: 40px
 }

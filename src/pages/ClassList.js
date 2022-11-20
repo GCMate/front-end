@@ -20,7 +20,6 @@ const ClassList = () => {
     // PhoneEnter page for registering 
     const {state} = useLocation();
     const {user_rin} = state; 
-    const {new_user} = state; 
 
     // Determines whether the user has chosen a subject yet 
     const [subjectChosen, setSubjChosen] = useState(false);
@@ -49,7 +48,6 @@ const ClassList = () => {
     // ====================
 
     // User's registered courses
-    const [emptyCourseList, setEmptyCourseList] = useState(true); 
     const [reg_courses, setRegCourses] = useState([]);  
 
     // Executed when page loads 
@@ -69,8 +67,7 @@ const ClassList = () => {
         body: JSON.stringify(rin_jsonData) 
 
         }).then((response) => response.json())
-        .then(data => {setRegCourses(data.courses)
-                       setEmptyCourseList(data.courses.length == 0)})
+        .then(data => {setRegCourses(data.courses)})
         .catch((err) => { console.log("Success!");});
     }
 
@@ -106,7 +103,6 @@ const ClassList = () => {
 
         }).then((response) => response.json())
         .then(data => {setRegCourses(data.courses)
-                       setEmptyCourseList(false)
                        setShowCorrectAlert(true)})
         .catch((err) => { setShowDuplicateAlert(true)});
         
@@ -259,10 +255,10 @@ const ClassList = () => {
             <Alert.Heading>Course Registered!</Alert.Heading>
         </Alert>
 
-        {/*<Alert show={showDuplicateAlert} variant="danger" className="CourseAlert"
+        <Alert show={showDuplicateAlert} variant="danger" className="CourseAlert"
             onClose={() => setShowDuplicateAlert(false)} dismissible>
             <Alert.Heading>Course Already Registered...</Alert.Heading>
-        </Alert>*/}
+        </Alert>
 
         <>
             <Button size="lg" variant="info" className="CoursesMenu"
