@@ -212,7 +212,8 @@ const GroupChat = () => {
                             <>
                             <Button size="sm" variant="outline-danger" 
                             onClick={leaveChat}> Leave Chat</Button>
-                            
+
+                            {/*
                             <Button size="sm" variant="outline-primary" className="ChatRoomButton"
                             onClick={() => setShowInvite(true)}> Invite</Button>
 
@@ -235,6 +236,7 @@ const GroupChat = () => {
                                         <Button onClick={()=> {checkValidRIN(inviteRIN);}}> Invite </Button>
                                     </Modal.Footer>
                             </Modal>
+                            */}
 
                             <Link to="/chat" 
                                     state={{ user_rin: rin, class_title: course_title, class_id: course_id }}>
