@@ -12,6 +12,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Toast from 'react-bootstrap/Toast';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Alert from 'react-bootstrap/Alert';
+import Modal from 'react-bootstrap/Modal';
 import './GroupChat.css';
 
 const GroupChat = () => {
@@ -27,11 +28,23 @@ const GroupChat = () => {
     // Alert for joining chat
     const [showJoinAlert, setShowJoinAlert] = useState(false); 
     // Alert for leaving chat
-    const [showLeaveAlert, setShowLeaveAlert] = useState(false);      
+    const [showLeaveAlert, setShowLeaveAlert] = useState(false);   
+    // Show the invite modal 
+    const [showInvite, setShowInvite] = useState(false);    
+    // Alert for successful invitation 
+    const [showInviteAlert, setShowInviteAlert] = useState(false); 
     // ====================    
 
-    const [members, setMembers] = useState([]); 
+    // Members list of a group chat 
+    const [members, setMembers] = useState([]);
+    // List of joined group chats 
     const [joinedChats, setJoinedChats] = useState([]); 
+    // Invite RIN 
+    const [inviteRIN, setInviteRIN] = useState(null);
+    /* validRIN = 0 --> Neutral
+     * validRIN = 1 --> RIN is invalid, Display "Invalid RIN" text
+     */
+    const [validRIN, setValidRIN] = useState(0); 
 
     // Executed when page loads 
     useEffect(() => {
@@ -49,6 +62,11 @@ const GroupChat = () => {
                         setJoinedChats(data.members.indexOf(rin) > -1 ? ['Chat Room 1'] : [])})
         .catch((err) => { console.log(err);});
     }, [])
+
+    // Get the user's typed in RIN for the group chat invitation
+    function getInviteRIN(val) {
+        setInviteRIN(val.target.value)
+    }    
 
     // ========== API CALLS ==========
     // Adds the user to the chat  
@@ -84,6 +102,35 @@ const GroupChat = () => {
         .catch((err) => { console.log(err);});
     }
     // =================================
+
+    const checkValidRIN = (r) => {
+        
+        // Valid RIN 
+        if (r.length === 9) { 
+            /*
+            const jsonData = { RIN: rin }
+            
+            fetch('http://127.0.0.1:5000/api/rin', {  // Enter your IP address here
+  
+            method: 'POST', 
+            headers: { "Content-Type": "application/json" }, 
+            body: JSON.stringify(jsonData) // body data type must match "Content-Type" header
+  
+            }).then((response) => response.json())
+            .then(rinData => {setRINData(rinData) 
+                              setValidRIN(2)
+                              setNextPage(rinData["valid"] === 'true')
+                              navigatePage(r, rinData["valid"] === 'true')})
+            .catch((err) => { console.log(err.message);});
+            */
+           console.log(r)
+           setShowInvite(false);
+           setShowInviteAlert(true); 
+           setValidRIN(0); 
+        } 
+        
+        else { setValidRIN(1); }
+      }
 
     return (
         <div className="GroupChat" style={{
@@ -166,6 +213,29 @@ const GroupChat = () => {
                             <Button size="sm" variant="outline-danger" 
                             onClick={leaveChat}> Leave Chat</Button>
                             
+                            <Button size="sm" variant="outline-primary" className="ChatRoomButton"
+                            onClick={() => setShowInvite(true)}> Invite</Button>
+
+                            <Modal centered show={showInvite} onHide={() => {setShowInvite(false); setValidRIN(0);}}
+                                    backdrop="static" keyboard={false}>
+                                    <Modal.Header closeButton>
+                                    <Modal.Title id="contained-modal-title-vcenter">
+                                     Invite Student! </Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body>  
+                                        {validRIN !== 1 &&
+                                            <h6> Please enter the RIN of the student you want to invite: </h6> }
+                                        
+                                        {validRIN === 1 && 
+                                            <h6 className="PromptTextInvalid"> Invalid RIN. Please try again: </h6>}
+                                        {'\n'}
+                                        <input type="number" onChange={getInviteRIN}/> 
+                                    </Modal.Body>
+                                    <Modal.Footer> 
+                                        <Button onClick={()=> {checkValidRIN(inviteRIN);}}> Invite </Button>
+                                    </Modal.Footer>
+                            </Modal>
+
                             <Link to="/chat" 
                                     state={{ user_rin: rin, class_title: course_title, class_id: course_id }}>
                                     <Button size="sm" variant="outline-dark" className="ChatRoomButton"> 
@@ -200,6 +270,11 @@ const GroupChat = () => {
         <Alert show={showLeaveAlert} variant="secondary" className="ChatAlert"
             onClose={() => setShowLeaveAlert(false)} dismissible>
             <Alert.Heading>You have left a group chat!</Alert.Heading>
+        </Alert>
+
+        <Alert show={showInviteAlert} variant="primary" className="ChatAlert"
+            onClose={() => setShowInviteAlert(false)} dismissible>
+            <Alert.Heading>Invitation Sent!</Alert.Heading>
         </Alert>
 
         </div>

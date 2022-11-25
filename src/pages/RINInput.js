@@ -25,8 +25,7 @@ const RINInput = () => {
       setRIN(val.target.value)
     }    
 
-    // Checks if the RIN is integer 
-    // + CHANGE LATER TO WORK WITH BACKEND 
+    // Checks if value is an integer 
     function isInt(val) {
       return !isNaN(+val);
     }
