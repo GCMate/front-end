@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Chat.css";
 import LeftArrowIcon from '../img/LeftArrowIcon.png'
 import { useNavigate, useLocation, Link } from 'react-router-dom'
@@ -17,6 +17,7 @@ import Tooltip from 'react-bootstrap/Tooltip';
 
 const auth = getAuth(app);
 const firestore = getFirestore(app);
+
 
 function SignIn() {
   const navigate = useNavigate();
@@ -156,6 +157,10 @@ function Chat() {
   const {state} = useLocation();
   const {class_title} = state;  
 
+  {/*useEffect(() => {
+    auth.signOut();
+  }, [])*/}
+  
   return (
     <div className="Chat">
           <h1> 
