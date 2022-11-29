@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useLocation, Link } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import gcmateLogo from '../img/GCMateIcon.png';
 import logoutIcon from '../img/LogoutIcon.png';
@@ -12,11 +12,9 @@ import Navbar from 'react-bootstrap/Navbar';
 import Toast from 'react-bootstrap/Toast';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Alert from 'react-bootstrap/Alert';
-import Modal from 'react-bootstrap/Modal';
 import './GroupChat.css';
 
 const GroupChat = () => {
-    const navigate = useNavigate();
     const {state} = useLocation();
     const {rin} = state; 
     const {course_title} = state;
@@ -103,35 +101,6 @@ const GroupChat = () => {
     }
     // =================================
 
-    const checkValidRIN = (r) => {
-        
-        // Valid RIN 
-        if (r.length === 9) { 
-            /*
-            const jsonData = { RIN: rin }
-            
-            fetch('http://127.0.0.1:5000/api/rin', {  // Enter your IP address here
-  
-            method: 'POST', 
-            headers: { "Content-Type": "application/json" }, 
-            body: JSON.stringify(jsonData) // body data type must match "Content-Type" header
-  
-            }).then((response) => response.json())
-            .then(rinData => {setRINData(rinData) 
-                              setValidRIN(2)
-                              setNextPage(rinData["valid"] === 'true')
-                              navigatePage(r, rinData["valid"] === 'true')})
-            .catch((err) => { console.log(err.message);});
-            */
-           console.log(r)
-           setShowInvite(false);
-           setShowInviteAlert(true); 
-           setValidRIN(0); 
-        } 
-        
-        else { setValidRIN(1); }
-      }
-
     return (
         <div className="GroupChat" style={{
             position: 'absolute',
@@ -212,31 +181,6 @@ const GroupChat = () => {
                             <>
                             <Button size="sm" variant="outline-danger" 
                             onClick={leaveChat}> Leave Chat</Button>
-
-                            {/*
-                            <Button size="sm" variant="outline-primary" className="ChatRoomButton"
-                            onClick={() => setShowInvite(true)}> Invite</Button>
-
-                            <Modal centered show={showInvite} onHide={() => {setShowInvite(false); setValidRIN(0);}}
-                                    backdrop="static" keyboard={false}>
-                                    <Modal.Header closeButton>
-                                    <Modal.Title id="contained-modal-title-vcenter">
-                                     Invite Student! </Modal.Title>
-                                    </Modal.Header>
-                                    <Modal.Body>  
-                                        {validRIN !== 1 &&
-                                            <h6> Please enter the RIN of the student you want to invite: </h6> }
-                                        
-                                        {validRIN === 1 && 
-                                            <h6 className="PromptTextInvalid"> Invalid RIN. Please try again: </h6>}
-                                        {'\n'}
-                                        <input type="number" onChange={getInviteRIN}/> 
-                                    </Modal.Body>
-                                    <Modal.Footer> 
-                                        <Button onClick={()=> {checkValidRIN(inviteRIN);}}> Invite </Button>
-                                    </Modal.Footer>
-                            </Modal>
-                            */}
 
                             <Link to="/chat" 
                                     state={{ user_rin: rin, class_title: course_title, class_id: course_id }}>

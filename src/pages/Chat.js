@@ -18,7 +18,6 @@ import Tooltip from 'react-bootstrap/Tooltip';
 const auth = getAuth(app);
 const firestore = getFirestore(app);
 
-
 function SignIn() {
   const navigate = useNavigate();
   const {state} = useLocation();
@@ -51,13 +50,28 @@ function SignIn() {
 }
 
 function SignOut() {
+  const navigate = useNavigate();
+  const {state} = useLocation();
+  const {user_rin} = state; 
+  const {class_title} = state;  
+  const {class_id} = state; 
+
   return (
     auth.currentUser && (
+      <>
       <Button size="lg" variant="danger" className="LogoutButton" 
       style={{position: 'absolute'}}
        onClick={() => auth.signOut()}>
         Sign Out
+      </Button>   
+
+      <Button size="lg" variant="info" className="GroupChatBackButton" 
+       style={{position: 'absolute'}}
+       onClick={() => navigate('/groupChat', 
+                      { state: { rin: user_rin, course_title: class_title, course_id: class_id } }) }>
+                <img src={LeftArrowIcon} alt="add item" width="30" /> Group Chats
       </Button>
+      </>   
     )
   );
 }
@@ -143,8 +157,6 @@ function ChatMessage(props) {
         <div className={`message ${messageClass}`}>
           <Badge pill bg="warning" text="dark" className="RINBadge"> {textRIN} </Badge>
           <p>{text}</p> 
-          {/*<span className="ExtraInfo"> {calculatedCreatedAt.toDate().toDateString()}</span>*/}
-          {/*<span className="ExtraInfo"> {calculatedCreatedAt.toDate().toLocaleTimeString()}</span>*/}
         </div>
       </div>
       
@@ -154,12 +166,6 @@ function ChatMessage(props) {
 
 function Chat() {
   const [user] = useAuthState(auth);
-  const {state} = useLocation();
-  const {class_title} = state;  
-
-  {/*useEffect(() => {
-    auth.signOut();
-  }, [])*/}
   
   return (
     <div className="Chat">

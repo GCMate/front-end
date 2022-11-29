@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import gcmateLogo from '../img/GCMateIcon.png';
 import MouseIcon from '../img/CompMouse.png';
 import LeftArrowIcon from '../img/LeftArrowIcon.png'
@@ -30,7 +30,6 @@ const PhoneEnter = () => {
     const [hover, setHover] = useState(false); 
     // Used to change text prompt if user inputs incorrect OTP 
     const [incorrectOTP, setIncorrectOTP] = useState(false); 
-    const [nextPage, setNextPage] = useState(false); 
 
     function checkValidPhoneNum() {
         if (phoneNum.length !== 11) { setValidPhoneNum(1); }
@@ -58,11 +57,9 @@ const PhoneEnter = () => {
       setOTP(pin); 
 
       if (pin.length === 6) { 
-        // Check correctness of OTP
-        let confirmationResult = window.confirmationResult; 
-        confirmationResult.confirm(pin).then((result) => {
-          // User signed in successfully.
-          const user = result.user;
+          // Check correctness of OTP
+          let confirmationResult = window.confirmationResult; 
+          confirmationResult.confirm(pin).then((result) => {
           
           const jsonData = { RIN: rin, PHONE: phoneNum }
 
@@ -75,12 +72,14 @@ const PhoneEnter = () => {
           }).then((response) => response.json())
           .catch((err) => { console.log(err.message);});
           
+          authentication.signOut(); 
+
           navigate('/classList', { state: { user_rin: rin, new_user: true } });
           
-        }).catch((error) => {
-          // Prompt user to try again 
-          setIncorrectOTP(true);
-        });
+          }).catch((error) => {
+            // Prompt user to try again 
+            setIncorrectOTP(true);
+          });
       }
     }
 
@@ -100,7 +99,6 @@ const PhoneEnter = () => {
             </Button>
           </Link>
 
-          {nextPage && <Navigate replace to="/classList"/>}
           <div className="Title"><h1 className="display-2"> Almost 
             <span className="LastWord1"> there...</span> </h1></div> 
     
