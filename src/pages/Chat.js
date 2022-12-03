@@ -5,7 +5,7 @@ import { useNavigate, useLocation, Link } from 'react-router-dom'
 import {collection, orderBy, query, limit, addDoc, serverTimestamp} from 'firebase/firestore';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import { getAuth, signInWithPopup, GoogleAuthProvider} from "firebase/auth";
+import { getAuth, signInWithPopup, signInAnonymously, GoogleAuthProvider} from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { app } from "../firebase-config";
 
@@ -59,12 +59,6 @@ function SignOut() {
   return (
     auth.currentUser && (
       <>
-      <Button size="lg" variant="danger" className="LogoutButton" 
-      style={{position: 'absolute'}}
-       onClick={() => auth.signOut()}>
-        Sign Out
-      </Button>   
-
       <Button size="lg" variant="info" className="GroupChatBackButton" 
        style={{position: 'absolute'}}
        onClick={() => navigate('/groupChat', 
@@ -90,12 +84,13 @@ function ChatRoom() {
   const sendMessage = async (e) => {
     e.preventDefault();
 
-    const { uid, photoURL } = auth.currentUser;
+    const { uid, photoURL, phoneNumber } = auth.currentUser;
 
     addDoc(messagesRef, {
       text: formValue,
       calculatedCreatedAt: serverTimestamp(),
       uid,
+      phoneNumber,
       photoURL,
       textRIN: user_rin
     })
@@ -115,7 +110,6 @@ function ChatRoom() {
 
           <span ref={dummy}></span>
         </main>
-        
         
           <OverlayTrigger placement='left'
             overlay={
@@ -147,10 +141,13 @@ function ChatRoom() {
 }
 
 function ChatMessage(props) {
+  const {state} = useLocation();
+  const {user_rin} = state;  
+
   const { text, uid, textRIN } = props.message;
 
-  const messageClass = uid === auth.currentUser.uid ? "sent" : "received";
-
+  const messageClass = user_rin === textRIN ? "sent" : "received";
+  
   return (
     <>
       <div className="Chat"> 
@@ -159,7 +156,6 @@ function ChatMessage(props) {
           <p>{text}</p> 
         </div>
       </div>
-      
     </>
   );
 }

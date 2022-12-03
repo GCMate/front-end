@@ -71,8 +71,6 @@ const PhoneEnter = () => {
 
           }).then((response) => response.json())
           .catch((err) => { console.log(err.message);});
-          
-          authentication.signOut(); 
 
           navigate('/classList', { state: { user_rin: rin, new_user: true } });
           
